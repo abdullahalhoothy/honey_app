@@ -16,6 +16,12 @@ jobs:
         run: |
           echo "VPS_SSH_KEY"
           echo "$VPS_SSH_KEY"
+      - name: Start SSH agent
+        run: eval "$(ssh-agent -s)"
+
+      - name: Add SSH key
+        run: ssh-add ~/.ssh/id_rsa
+
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.3
         with:
@@ -26,7 +32,8 @@ ogAAAAtzc2gtZWQyNTUxOQAAACBKhW5K3gjZIHFiRLzCrt8IA9oihiX/xV81VAVrOD2new
 AAAED3EZtG3byOrvlVUuVyRHIyyvpW0lnirgDi9EtiD1NiKEqFbkreCNkgcWJEvMKu3wgD
 2iKGJf/FXzVUBWs4Pad7AAAAF3NoZWhyYW0udGFoaXJAZ21haWwuY29tAQIDBAUG
 -----END OPENSSH PRIVATE KEY-----"
-
+      - name: Set permissions for SSH key
+        run: chmod 600 ~/.ssh/id_rsa
       - name: Deploy to VPS
         env:  # Set environment variables
           VPS_HOST: ${{ secrets.VPS_HOST }}
