@@ -12,18 +12,24 @@ jobs:
     steps:
       - name: Set up SSH
         env:
-          SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          SSH_KEY: '-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
+QyNTUxOQAAACBKhW5K3gjZIHFiRLzCrt8IA9oihiX/xV81VAVrOD2newAAAKB3ImOidyJj
+ogAAAAtzc2gtZWQyNTUxOQAAACBKhW5K3gjZIHFiRLzCrt8IA9oihiX/xV81VAVrOD2new
+AAAED3EZtG3byOrvlVUuVyRHIyyvpW0lnirgDi9EtiD1NiKEqFbkreCNkgcWJEvMKu3wgD
+2iKGJf/FXzVUBWs4Pad7AAAAF3NoZWhyYW0udGFoaXJAZ21haWwuY29tAQIDBAUG
+-----END OPENSSH PRIVATE KEY-----'
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H $VPS_HOST >> ~/.ssh/known_hosts  # Replace with your VPS IP
+          ssh-keyscan -H 37.27.201.200 >> ~/.ssh/known_hosts  # Replace with your VPS IP
       - name: Deploy to VPS
         env:  # Set environment variables
           VPS_HOST: ${{ secrets.VPS_HOST }}
           VPS_USERNAME: ${{ secrets.VPS_USERNAME }}
         run: |
-          ssh -o StrictHostKeyChecking=no $VPS_USERNAME@$VPS_HOST << 'EOF'
+          ssh -o StrictHostKeyChecking=no root@37.27.201.200 << 'EOF'
             echo "Turning off containers."
             docker compose down
             cd honey_app && git pull
