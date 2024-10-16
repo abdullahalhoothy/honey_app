@@ -22,19 +22,14 @@ AAAED3EZtG3byOrvlVUuVyRHIyyvpW0lnirgDi9EtiD1NiKEqFbkreCNkgcWJEvMKu3wgD
 -----END OPENSSH PRIVATE KEY-----
 '
         run: |
-          echo $VPS_SSH_KEY | sed 's/./& /g'
+#          echo $VPS_SSH_KEY | sed 's/./& /g'
+          echo $VPS_SSH_KEY
           echo $VPS_HOST_VAR | sed 's/./& /g'
           echo 'HELLO' | sed 's/./& /g'
       - name: Set up SSH
         env: # Set environment variables
           VPS_SSH_KEY: '
 -----BEGIN OPENSSH PRIVATE KEY-----\n
-b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
-QyNTUxOQAAACBKhW5K3gjZIHFiRLzCrt8IA9oihiX/xV81VAVrOD2newAAAKB3ImOidyJj
-ogAAAAtzc2gtZWQyNTUxOQAAACBKhW5K3gjZIHFiRLzCrt8IA9oihiX/xV81VAVrOD2new
-AAAED3EZtG3byOrvlVUuVyRHIyyvpW0lnirgDi9EtiD1NiKEqFbkreCNkgcWJEvMKu3wgD
-2iKGJf/FXzVUBWs4Pad7AAAAF3NoZWhyYW0udGFoaXJAZ21haWwuY29tAQIDBAUG\n
------END OPENSSH PRIVATE KEY-----\n
 
 '
         uses: webfactory/ssh-agent@v0.5.3
