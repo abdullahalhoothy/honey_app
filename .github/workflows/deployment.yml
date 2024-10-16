@@ -22,7 +22,7 @@ jobs:
           VPS_USERNAME: ${{ secrets.VPS_USERNAME }}
         run: |
           ssh -o StrictHostKeyChecking=no $VPS_USERNAME@$VPS_HOST << 'EOF'
-            echo "Turning off containers ."
+            echo "Turning off containers."
             docker compose down
             cd honey_app && git pull
             git submodule update --remote --recursive --merge &&
