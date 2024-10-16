@@ -11,9 +11,9 @@ jobs:
 
     steps:
       - name: Set up SSH
-        env:  # Set environment variables
+#        env:  # Set environment variables
 #          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
-          VPS_HOST_VAR: ${{ env.VPS_HOST_VAR }}
+#          VPS_HOST_VAR: ${{ env.VPS_HOST_VAR }}
 #        run: |
 #          echo $VPS_SSH_KEY | sed 's/./& /g'
 #          echo $VPS_HOST_VAR | sed 's/./& /g'
