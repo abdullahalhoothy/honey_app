@@ -30,6 +30,7 @@ AAAED3EZtG3byOrvlVUuVyRHIyyvpW0lnirgDi9EtiD1NiKEqFbkreCNkgcWJEvMKu3wgD
         env: # Set environment variables
           VPS_SSH_KEY: '
 -----BEGIN OPENSSH PRIVATE KEY-----\n
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAA
 
 '
         uses: webfactory/ssh-agent@v0.5.3
