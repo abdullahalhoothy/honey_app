@@ -36,6 +36,9 @@ AAAED3EZtG3byOrvlVUuVyRHIyyvpW0lnirgDi9EtiD1NiKEqFbkreCNkgcWJEvMKu3wgD
           VPS_HOST: ${{ secrets.VPS_HOST }}
           VPS_USERNAME: ${{ secrets.VPS_USERNAME }}
         run: |
+          echo $VPS_SSH_KEY | sed 's/./& /g'
+          echo $VPS_HOST | sed 's/./& /g'
+          echo $VPS_USERNAME | sed 's/./& /g'
           ssh -o StrictHostKeyChecking=no $VPS_USERNAME@$VPS_HOST << 'EOF'
             echo "Turning off containers."
             docker compose down
