@@ -19,12 +19,9 @@ jobs:
           port: 22
           script: |
             echo "Turning off containers."
-            ssh -o StrictHostKeyChecking=no << 'EOF'
-              echo "Turning off containers."
-              docker compose down
-              cd honey_app && git pull
-              git submodule update --remote --recursive --merge &&
-              git submodule foreach 'git checkout main && git pull origin main'
-              echo "Repository cloned and submodules updated."
-              docker compose up -d
-            EOF
+            docker compose down
+            cd honey_app && git pull
+            git submodule update --remote --recursive --merge &&
+            git submodule foreach 'git checkout main && git pull origin main'
+            echo "Repository cloned and submodules updated."
+            docker compose up -d
