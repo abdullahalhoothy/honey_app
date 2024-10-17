@@ -21,6 +21,7 @@ AAAED3EZtG3byOrvlVUuVyRHIyyvpW0lnirgDi9EtiD1NiKEqFbkreCNkgcWJEvMKu3wgD
 -----END OPENSSH PRIVATE KEY-----'
         run: |
           mkdir -p ~/.ssh
+          ls -lah ~/.ssh/
           echo "$SSH_KEY" > ~/.ssh/id_rsa
           ls ~/.ssh/
           echo "Updated code"
