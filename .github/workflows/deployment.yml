@@ -24,6 +24,7 @@ AAAED3EZtG3byOrvlVUuVyRHIyyvpW0lnirgDi9EtiD1NiKEqFbkreCNkgcWJEvMKu3wgD
           ls -lah ~/.ssh/
           echo "$SSH_KEY" > ~/.ssh/id_rsa
           ls -lah ~/.ssh/
+          ssh-add ~/.ssh/id_rsa
           echo "Updated code"
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 37.27.201.200 >> ~/.ssh/known_hosts  # Replace with your VPS IP
@@ -32,7 +33,7 @@ AAAED3EZtG3byOrvlVUuVyRHIyyvpW0lnirgDi9EtiD1NiKEqFbkreCNkgcWJEvMKu3wgD
           VPS_HOST: ${{ secrets.VPS_HOST }}
           VPS_USERNAME: ${{ secrets.VPS_USERNAME }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa root@37.27.201.200 << 'EOF'
+          ssh -o StrictHostKeyChecking=no << 'EOF'
             echo "Turning off containers."
             docker compose down
             cd honey_app && git pull
