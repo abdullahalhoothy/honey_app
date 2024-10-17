@@ -33,13 +33,7 @@ jobs:
       with:
         host: 37.27.201.200
         username: root
-        key: '-----BEGIN OPENSSH PRIVATE KEY-----
-b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
-QyNTUxOQAAACBKhW5K3gjZIHFiRLzCrt8IA9oihiX/xV81VAVrOD2newAAAKB3ImOidyJj
-ogAAAAtzc2gtZWQyNTUxOQAAACBKhW5K3gjZIHFiRLzCrt8IA9oihiX/xV81VAVrOD2new
-AAAED3EZtG3byOrvlVUuVyRHIyyvpW0lnirgDi9EtiD1NiKEqFbkreCNkgcWJEvMKu3wgD
-2iKGJf/FXzVUBWs4Pad7AAAAF3NoZWhyYW0udGFoaXJAZ21haWwuY29tAQIDBAUG
------END OPENSSH PRIVATE KEY-----'
+        key: ${{ secrets.VPS_SSH_KEY }}
         port: 22
         script: |
           echo "Turning off containers."
