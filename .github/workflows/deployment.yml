@@ -10,24 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-#      - name: Set up SSH
-#        env:
-#          SSH_KEY: '-----BEGIN OPENSSH PRIVATE KEY-----
-#b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
-#QyNTUxOQAAACBKhW5K3gjZIHFiRLzCrt8IA9oihiX/xV81VAVrOD2newAAAKB3ImOidyJj
-#ogAAAAtzc2gtZWQyNTUxOQAAACBKhW5K3gjZIHFiRLzCrt8IA9oihiX/xV81VAVrOD2new
-#AAAED3EZtG3byOrvlVUuVyRHIyyvpW0lnirgDi9EtiD1NiKEqFbkreCNkgcWJEvMKu3wgD
-#2iKGJf/FXzVUBWs4Pad7AAAAF3NoZWhyYW0udGFoaXJAZ21haWwuY29tAQIDBAUG
-#-----END OPENSSH PRIVATE KEY-----'
-#        run: |
-#          mkdir -p ~/.ssh
-#          ls -lah ~/.ssh/
-#          echo "$SSH_KEY" > ~/.ssh/id_rsa
-#          ls -lah ~/.ssh/
-#          ssh-add ~/.ssh/id_rsa
-#          echo "Updated code"
-#          chmod 600 ~/.ssh/id_rsa
-#          ssh-keyscan -H 37.27.201.200 >> ~/.ssh/known_hosts  # Replace with your VPS IP
     - name: Deploy using ssh
       uses: appleboy/ssh-action@master
       with:
