@@ -23,7 +23,7 @@ AAAED3EZtG3byOrvlVUuVyRHIyyvpW0lnirgDi9EtiD1NiKEqFbkreCNkgcWJEvMKu3wgD
           mkdir -p ~/.ssh
           ls -lah ~/.ssh/
           echo "$SSH_KEY" > ~/.ssh/id_rsa
-          ls ~/.ssh/
+          ls -lah ~/.ssh/
           echo "Updated code"
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 37.27.201.200 >> ~/.ssh/known_hosts  # Replace with your VPS IP
