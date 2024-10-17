@@ -25,4 +25,4 @@ jobs:
             git submodule update --remote --recursive --merge &&
             git submodule foreach 'git checkout main && git pull origin main'
             echo "Repository cloned and submodules updated."
-#            docker compose up -d
+            docker compose up -d
