@@ -19,8 +19,9 @@ jobs:
           port: 22
           script: |
             echo "Turning off containers."
+            cd honey_app
             docker compose down
-            cd honey_app && git pull
+            git pull
             git submodule update --remote --recursive --merge &&
             git submodule foreach 'git checkout main && git pull origin main'
             echo "Repository cloned and submodules updated."
