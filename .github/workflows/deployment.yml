@@ -1,0 +1,28 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy using ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22
+          script: |
+            echo "Turning off containers."
+            cd honey_app
+            docker compose down
+            git pull
+            git submodule update --remote --recursive --merge &&
+            git submodule foreach 'git checkout main && git pull origin main'
+            echo "Repository cloned and submodules updated."
+            docker compose up -d
