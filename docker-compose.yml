@@ -10,6 +10,9 @@ services:
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
     depends_on:
       - db
+    networks:
+      - my_network
+
   db:
     image: postgres:17
     restart: always
@@ -21,4 +24,25 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./my_postgres_data:/var/lib/postgresql/data
+      - ./postgres_data:/var/lib/postgresql/data
+    networks:
+      - my_network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: $PG_ADMIN_EMAIL
+      PGADMIN_DEFAULT_PASSWORD: $PG_ADMIN_PASS
+    ports:
+      - "8080:80"  # Expose pgAdmin on port 8080
+    networks:
+      - my_network
+    depends_on:
+      - db
+
+
+networks:
+  my_network:
+
+
