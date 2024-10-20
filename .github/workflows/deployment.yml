@@ -19,6 +19,13 @@ jobs:
           port: 22
           script: |
             echo "Turning off containers."
+            REPO_URL="git@github.com:shehram-tahir/honey_app.git"  # Replace with your repository URL
+            DIR_NAME="honey_app"  # Replace with your desired directory name
+            if [ ! -d "$DIR_NAME" ]; then
+              git clone "$REPO_URL" --recursive -c submodule."honey_frontend".update=none "$DIR_NAME"
+            else
+              echo "Directory $DIR_NAME already exists. Skipping clone."            
+            fi
             cd honey_app
             docker compose down
             git pull
