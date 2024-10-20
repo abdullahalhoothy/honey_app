@@ -24,7 +24,7 @@ jobs:
             REPO_URL="git@github.com:shehram-tahir/honey_app.git"  # Replace with your repository URL
             DIR_NAME="honey_app"  # Replace with your desired director
             eval `ssh-agent -s`
-            ssh-add $GIT_SSH_KEY
+            ssh-add "~/.ssh/shehram"
             if [ ! -d "$DIR_NAME" ]; then
               echo "Cloning $REPO_URL"
               git clone "$REPO_URL" --recursive -c submodule."honey_frontend".update=none "$DIR_NAME"
