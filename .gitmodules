@@ -3,12 +3,12 @@
 	url = https://github.com/abdullahalhoothy/backend_api_honey.git
 	branch = main
 
-[submodule "honey_frontend"]
-	path = honey_frontend
-	url = https://github.com/abdullahalhoothy/honey_frontend.git
-	branch = main
-
 [submodule "backend_api_honey/backend_common"]
     path = backend_api_honey/backend_common
     url = https://github.com/abdullahalhoothy/backend_common.git
     branch = main	
+	
+[submodule "vivi_app"]
+	path = vivi_app
+	url = https://github.com/abdullahalhoothy/vivi_app.git
+	branch = main
