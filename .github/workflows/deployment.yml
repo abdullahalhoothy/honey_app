@@ -23,7 +23,7 @@ jobs:
             DIR_NAME="honey_app"
             if [ ! -d "$DIR_NAME" ]; then
               echo "Cloning $REPO_URL"
-              git clone "$REPO_URL" --recursive -c submodule."honey_frontend".update=none "$DIR_NAME"
+              git clone "$REPO_URL" --recursive
             else
               echo "Directory $DIR_NAME already exists. Skipping clone."            
             fi
