@@ -19,7 +19,7 @@ jobs:
           port: 22
           script: |
             echo "Turning off containers."
-            REPO_URL="git@github.com:abdullahalhoothy/honey_app.git"
+            REPO_URL="https://github.com/abdullahalhoothy/honey_app.git"
             DIR_NAME="honey_app"
             if [ ! -d "$DIR_NAME" ]; then
               echo "Cloning $REPO_URL"
@@ -34,3 +34,4 @@ jobs:
             git submodule foreach 'git checkout main && git pull origin main'
             echo "Repository cloned and submodules updated."
             docker compose up -d
+
