@@ -29,7 +29,8 @@ jobs:
             fi
             cd honey_app
             docker compose down
-            docker container rm backend && docker image rm honey_app-backend_common
+            docker container rm backend
+            docker image rm honey_app-backend_common
             git pull
             git submodule update --remote --recursive --merge &&
             git submodule foreach 'git checkout main && git pull origin main'
