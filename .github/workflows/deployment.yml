@@ -29,7 +29,12 @@ jobs:
             fi
             cd honey_app
             docker compose down
-            docker container rm backend
+            echo "Docker compose down completed."
+            
+            cd ..
+            rm -rf honey_app
+            echo "Removed existing honey_app directory."
+            
             docker image rm honey_app-backend_common
             git pull
             git submodule update --remote --recursive --merge &&
