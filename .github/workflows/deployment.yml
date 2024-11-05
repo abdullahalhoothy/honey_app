@@ -18,24 +18,24 @@ jobs:
           key: ${{ secrets.VIVI_APP_SSH_KEY }}
           port: 22
           script: |
-            echo "Turning off containers."
             REPO_URL="https://github.com/abdullahalhoothy/honey_app.git"
             DIR_NAME="honey_app"
-            if [ ! -d "$DIR_NAME" ]; then
-              echo "Cloning $REPO_URL"
-              git clone "$REPO_URL" --recursive
-            else
-              echo "Directory $DIR_NAME already exists. Skipping clone."            
-            fi
-            cd honey_app
+            
+            echo "Turning off containers."
+            cd $DIR_NAME
             docker compose down
             echo "Docker compose down completed."
             
             cd ..
-            rm -rf honey_app
-            echo "Removed existing honey_app directory."
+            rm -rf $DIR_NAME
+            echo "Removed existing $DIR_NAME directory."
             
             docker image rm honey_app-backend_common
+
+            echo "Cloning $REPO_URL"
+            git clone "$REPO_URL" --recursive
+            
+            cd $DIR_NAME
             git pull
             git submodule update --remote --recursive --merge &&
             git submodule foreach 'git checkout main && git pull origin main'
