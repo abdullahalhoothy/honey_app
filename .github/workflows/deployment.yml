@@ -49,6 +49,7 @@ jobs:
             git submodule foreach 'git checkout main && git pull origin main'
             echo "Repository cloned and submodules updated."
 
+            mkdir -p storage/secrets
             echo '${{ secrets.DATABASE_ENV }}' > storage/secrets/database.env
             
             docker compose up -d
