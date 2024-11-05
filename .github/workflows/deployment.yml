@@ -40,5 +40,8 @@ jobs:
             git submodule update --remote --recursive --merge &&
             git submodule foreach 'git checkout main && git pull origin main'
             echo "Repository cloned and submodules updated."
+
+            echo '${{ secrets.DATABASE_ENV }}' > storage/secrets/database.env
+            
             docker compose up -d
 
