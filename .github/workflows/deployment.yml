@@ -18,7 +18,7 @@ jobs:
       - name: Deploy using ssh
         uses: appleboy/ssh-action@master
         env:
-          SECRET_DATABASE_ENV: ${{ secrets.DATABASE_ENV }}
+          DATABASE_ENV: ${{ secrets.DATABASE_ENV }}
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
