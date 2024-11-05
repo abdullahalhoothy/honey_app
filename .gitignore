@@ -11,7 +11,7 @@ mykeys*
 ssh_config
 storage/postgres/sql_logs/**
 /node_modules
-
+**/desktop.ini
 .DS_Store
 
 

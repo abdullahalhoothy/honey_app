@@ -1,26 +1,22 @@
-version: '3.8'
-
 services:
   backend_common:
     build: backend_api_honey/
     container_name: backend
     ports:
       - "8000:8000"
-    environment:
-      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+    env_file:
+      - storage/secrets/database.env
     depends_on:
       - db
     networks:
       - my_network
 
   db:
-    image: postgres:17
+    build: storage/
+    env_file:
+      - storage/secrets/database.env
     restart: always
     container_name: postgres
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
     volumes:
@@ -29,17 +25,17 @@ services:
       - my_network
 
   pgadmin:
-    image: dpage/pgadmin4:latest
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: $PG_ADMIN_EMAIL
-      PGADMIN_DEFAULT_PASSWORD: $PG_ADMIN_PASS
+    build:
+      context: .
+      dockerfile: pgadmin/Dockerfile
+    env_file:
+      - storage/secrets/database.env
     ports:
-      - "8080:80"  # Expose pgAdmin on port 8080
-    networks:
-      - my_network
+      - "5050:80"
     depends_on:
       - db
+    networks:
+      - my_network
 
 
 networks:
