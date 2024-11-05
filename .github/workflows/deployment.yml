@@ -17,11 +17,14 @@ jobs:
     steps:
       - name: Deploy using ssh
         uses: appleboy/ssh-action@master
+        env:
+          SECRET_DATABASE_ENV: ${{ secrets.DATABASE_ENV }}
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VIVI_APP_SSH_KEY }}
           port: 22
+          envs: DATABASE_ENV
           script: |
             REPO_URL="https://github.com/abdullahalhoothy/honey_app.git"
             DIR_NAME="honey_app"
