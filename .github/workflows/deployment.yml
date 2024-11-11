@@ -37,7 +37,7 @@ jobs:
             echo "Starting deployment process..."
             echo "Current directory: $(pwd)" 
             
-            cd $DIR_NAME
+            cd "$HOME/$DIR_NAME"
             docker compose down
             echo "Docker compose down completed."
 
