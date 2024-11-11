@@ -43,7 +43,8 @@ jobs:
                 echo "Docker compose down completed."
                 cd ..
                 rm -rf $DIR_NAME
-                echo "Removed existing $DIR_NAME directory."  
+                echo "Removed existing $DIR_NAME directory." 
+            fi
             
             # Clone the repository and update submodules
             git clone --recursive $REPO_URL &&
