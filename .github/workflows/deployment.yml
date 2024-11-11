@@ -37,38 +37,38 @@ jobs:
             echo "Starting deployment process..."
             echo "Current directory: $(pwd)" 
             
-            cd "$HOME/$DIR_NAME"
-            docker compose down
-            echo "Docker compose down completed."
-
-            cd ..
-            # rm -rf $DIR_NAME #TODO this will delete the data in the database
-            # echo "Removed existing $DIR_NAME directory."
+            if [ -d "$DIR_NAME" ]; then
+                cd $DIR_NAME
+                docker compose down
+                echo "Docker compose down completed."
+                cd ..
+                rm -rf $DIR_NAME
+                echo "Removed existing $DIR_NAME directory."  
             
-            # # Clone the repository and update submodules
-            # git clone --recursive $REPO_URL &&
-            # cd $DIR_NAME &&
-            # git submodule update --remote --recursive --merge &&
-            # git submodule foreach 'git checkout main && git pull origin main'
-            # echo "Repository cloned and submodules updated."
+            # Clone the repository and update submodules
+            git clone --recursive $REPO_URL &&
+            cd $DIR_NAME &&
+            git submodule update --remote --recursive --merge &&
+            git submodule foreach 'git checkout main && git pull origin main'
+            echo "Repository cloned and submodules updated."
 
-            # # Create secrets directory if it doesn't exist
-            # mkdir -p $DIR_NAME/$BACKEND_NAME/secrets
-            # mkdir -p storage/secrets
-            # echo "Secret directories created."
+            # Create secrets directory if it doesn't exist
+            mkdir -p $DIR_NAME/$BACKEND_NAME/secrets
+            mkdir -p storage/secrets
+            echo "Secret directories created."
 
-            # # Create secret files
-            # echo '${{ secrets.FIREBASE_ADMIN_SDK }}' > $BACKEND_NAME/secrets/secret_fir-locator-35839-firebase-adminsdk-yb6f6-a5b81519d9.json
-            # echo '${{ secrets.SECRETS_FIREBASE }}' > $BACKEND_NAME/secrets/secrets_firebase.json
-            # echo '${{ secrets.DATABASE_ENV }}' > storage/secrets/database.env
-            # echo "Secret files created."
+            # Create secret files
+            echo '${{ secrets.FIREBASE_ADMIN_SDK }}' > $BACKEND_NAME/secrets/secret_fir-locator-35839-firebase-adminsdk-yb6f6-a5b81519d9.json
+            echo '${{ secrets.SECRETS_FIREBASE }}' > $BACKEND_NAME/secrets/secrets_firebase.json
+            echo '${{ secrets.DATABASE_ENV }}' > storage/secrets/database.env
+            echo "Secret files created."
             
-            # # Build and run Docker containers
-            # docker compose build
-            # echo "Docker compose build completed."
+            # Build and run Docker containers
+            docker compose build
+            echo "Docker compose build completed."
 
-            # docker compose up -d
-            # echo "Docker compose up completed."
+            docker compose up -d
+            echo "Docker compose up completed."
             
-            # echo "Deployment process finished."
+            echo "Deployment process finished."
 
