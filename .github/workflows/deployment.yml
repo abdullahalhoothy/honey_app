@@ -18,39 +18,57 @@ jobs:
       - name: Deploy using ssh
         uses: appleboy/ssh-action@master
         env:
+          FIREBASE_ADMIN_SDK: ${{ secrets.FIREBASE_ADMIN_SDK }}
           DATABASE_ENV: ${{ secrets.DATABASE_ENV }}
+          SECRETS_FIREBASE: ${{ secrets.SECRETS_FIREBASE }}
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VIVI_APP_SSH_KEY }}
           port: 22
-          envs: DATABASE_ENV
+          envs: FIREBASE_ADMIN_SDK,SECRETS_FIREBASE,DATABASE_ENV
           script: |
+          
             REPO_URL="https://github.com/abdullahalhoothy/honey_app.git"
             DIR_NAME="honey_app"
+            backend_name="backend_api_honey"
             
-            echo "Turning off containers."
-            cd $DIR_NAME
+            set -x  # Enable debug mode
+            
+            echo "Starting deployment process..."
+            
+            cd DIR_NAME
             docker compose down
             echo "Docker compose down completed."
-            
-            cd ..
-            rm -rf $DIR_NAME
-            echo "Removed existing $DIR_NAME directory."
-            
-            docker image rm honey_app-backend_common
 
-            echo "Cloning $REPO_URL"
-            git clone "$REPO_URL" --recursive
+            cd ..
+            rm -rf DIR_NAME #TODO this will delete the data in the database
+            echo "Removed existing DIR_NAME directory."
             
-            cd $DIR_NAME
-            git pull
+            # Clone the repository and update submodules
+            git clone --recursive REPO_URL &&
+            cd DIR_NAME &&
             git submodule update --remote --recursive --merge &&
             git submodule foreach 'git checkout main && git pull origin main'
-            echo "Repository cloned and submodules updated."
+            echo "Repository cloned and submodules updated."WE
 
+            # Create secrets directory if it doesn't exist
+            mkdir -p DIR_NAME/backend_name/secrets
             mkdir -p storage/secrets
-            echo '${{ secrets.DATABASE_ENV }}' > storage/secrets/database.env
+            echo "Secret directories created."
+
+            # Create secret files
+            echo '${{ secrets.FIREBASE_ADMIN_SDK }}' > backend_name/secrets/secret_fir-locator-35839-firebase-adminsdk-yb6f6-a5b81519d9.json
+            echo '${{ secrets.SECRETS_FIREBASE }}' > backend_name/secrets/secrets_firebase.json
+            echo '${{ secrets.SECRET_DATABASE_ENV }}' > storage/secrets/secrets_database.env
+            echo "Secret files created."
             
+            # Build and run Docker containers
+            docker compose build
+            echo "Docker compose build completed."
+
             docker compose up -d
+            echo "Docker compose up completed."
+            
+            echo "Deployment process finished."
 
