@@ -7,7 +7,7 @@ FROM dpage/pgadmin4
 USER root
 
 # Copy the server.json file into the container
-COPY ../storage/secrets/server.json /pgadmin4/servers.json
+COPY ../storage/secrets/servers.json /pgadmin4/servers.json
 
 # Copy the secrets file
 COPY ../storage/secrets/database.env /pgpass
