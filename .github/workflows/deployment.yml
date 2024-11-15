@@ -21,12 +21,13 @@ jobs:
           FIREBASE_ADMIN_SDK: ${{ secrets.FIREBASE_ADMIN_SDK }}
           DATABASE_ENV: ${{ secrets.DATABASE_ENV }}
           SECRETS_FIREBASE: ${{ secrets.SECRETS_FIREBASE }}
+          SERVERS: ${{ secrets.SERVERS }}
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VIVI_APP_SSH_KEY }}
           port: 22
-          envs: FIREBASE_ADMIN_SDK,SECRETS_FIREBASE,DATABASE_ENV
+          envs: FIREBASE_ADMIN_SDK,SECRETS_FIREBASE,DATABASE_ENV,SERVERS
           script: |
           
             REPO_URL="https://github.com/abdullahalhoothy/honey_app.git"
@@ -62,6 +63,7 @@ jobs:
             echo '${{ secrets.FIREBASE_ADMIN_SDK }}' > $BACKEND_NAME/secrets/secret_fir-locator-35839-firebase-adminsdk-yb6f6-a5b81519d9.json
             echo '${{ secrets.SECRETS_FIREBASE }}' > $BACKEND_NAME/secrets/secrets_firebase.json
             echo '${{ secrets.DATABASE_ENV }}' > storage/secrets/database.env
+            echo '${{ secrets.SERVERS }}' > storage/secrets/servers.json
             echo "Secret files created."
             
             # Build and run Docker containers
