@@ -55,9 +55,15 @@ jobs:
             echo "Repository cloned and submodules updated."
 
             # Create secrets directory if it doesn't exist
-            mkdir -p $DIR_NAME/$BACKEND_NAME/secrets
-            mkdir -p storage/secrets
+            mkdir -p "${BACKEND_NAME}/secrets"
+            mkdir -p "storage/secrets"
             echo "Secret directories created."
+            
+            # Add error checking
+            if [ ! -d "${BACKEND_NAME}/secrets" ]; then
+                echo "Failed to create secrets directory"
+                exit 1
+            fi
 
             # Create secret files
             echo '${{ secrets.FIREBASE_ADMIN_SDK }}' > $BACKEND_NAME/secrets/secret_fir-locator-35839-firebase-adminsdk-yb6f6-a5b81519d9.json
