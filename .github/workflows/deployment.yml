@@ -18,7 +18,7 @@ jobs:
       - name: Deploy using ssh
         uses: appleboy/ssh-action@master
         env:
-          FIREBASE_ADMIN_SDK: ${{ secrets.FIREBASE_ADMIN_SDK }}
+          FIREBASE_SA: ${{ secrets.FIREBASE_SA }}
           DATABASE_ENV: ${{ secrets.DATABASE_ENV }}
           SECRETS_FIREBASE: ${{ secrets.SECRETS_FIREBASE }}
           SERVERS: ${{ secrets.SERVERS }}
@@ -27,7 +27,7 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VIVI_APP_SSH_KEY }}
           port: 22
-          envs: FIREBASE_ADMIN_SDK,SECRETS_FIREBASE,DATABASE_ENV,SERVERS
+          envs: FIREBASE_SA,SECRETS_FIREBASE,DATABASE_ENV,SERVERS
           script: |
           
             REPO_URL="https://github.com/abdullahalhoothy/honey_app.git"
@@ -66,7 +66,7 @@ jobs:
             fi
 
             # Create secret files
-            echo '${{ secrets.FIREBASE_ADMIN_SDK }}' > $BACKEND_NAME/secrets/secret_fir-locator-35839-firebase-adminsdk-yb6f6-a5b81519d9.json
+            echo '${{ secrets.FIREBASE_SA }}' > $BACKEND_NAME/secrets/secret_firebase_sa.json
             echo '${{ secrets.SECRETS_FIREBASE }}' > $BACKEND_NAME/secrets/secrets_firebase.json
             echo '${{ secrets.DATABASE_ENV }}' > storage/secrets/database.env
             echo '${{ secrets.SERVERS }}' > storage/secrets/servers.json
